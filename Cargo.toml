@@ -1,0 +1,73 @@
+[package]
+name = "rmodbus"
+version = "0.9.9"
+authors = ["Serhij S. <div@altertech.com>"]
+edition = "2021"
+license = "Apache-2.0"
+repository = "https://github.com/alttch/rmodbus"
+description = "Fast and platform-independent Modbus server framework"
+readme = "README.md"
+keywords = ["modbus", "server", "hardware", "nostd"]
+autoexamples = false
+
+[package.metadata.docs.rs]
+features = []
+
+[package.metadata.playground]
+features = []
+
+[lib]
+name = "rmodbus"
+path = "src/lib.rs"
+
+[dependencies]
+
+[features]
+default = ["std"]
+std = []
+with_serde = ["serde", "serde_arrays"]
+with_bincode = ["bincode"]
+# Provide impls for types in the Rust core allocation and collections library
+# including String, Box<T>, Vec<T>, and Cow<T>. This is a subset of std but may
+# be enabled without depending on all of std.
+alloc = []
+defmt = ["dep:defmt"]
+
+[dev-dependencies]
+rand = "0.7.3"
+crc16 = "0.4.0"
+serial = "0.4.0"
+fixedvec = "0.2.4"
+spin = "0.5.2"
+bincode = "2.0.0-rc.2"
+once_cell = "1.19.0"
+
+[[example]]
+name = "app"
+path = "examples/app.rs"
+required-features = ["std", "with_bincode"]
+
+[[example]]
+name = "tcpserver"
+path = "examples/tcpserver.rs"
+required-features = ["std"]
+
+[[example]]
+name = "udpserver"
+path = "examples/udpserver.rs"
+required-features = ["std"]
+
+[[example]]
+name = "rtuserver"
+path = "examples/rtuserver.rs"
+required-features = ["std"]
+
+[[example]]
+name = "asciiserver"
+path = "examples/asciiserver.rs"
+required-features = ["std"]
+
+[[example]]
+name = "tcpclient"
+path = "examples/tcpclient.rs"
+required-features = ["std"]
